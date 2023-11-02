@@ -9,7 +9,6 @@ PG_DB = "piscineds"
 BASE_DIR = "/app/subject/customer"
 
 def table_exists(conn, cursor, table_name):
-    # cursor = conn.cursor()
     # Query the information schema to check if the table exists
     cursor.execute(f"SELECT COUNT(*) FROM {table_name}")
     table_count = cursor.fetchone()[0]
@@ -56,7 +55,6 @@ def create_table_and_load_data(file):
         print(f"Created table {table_name}")
         if table_exists(conn, cursor, table_name) is False:
             load_data(conn, cursor, table_name)
-        print(f"Loaded data from {file} into {table_name}")
         # close the cursor and connection
         cursor.close()
         conn.close()
@@ -68,5 +66,4 @@ if __name__ == "__main__":
         print("Usage: python script.py <filename>")
     else:
         file = sys.argv[1]
-        print(file)
         create_table_and_load_data(file)
