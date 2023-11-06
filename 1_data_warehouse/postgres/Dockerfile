@@ -7,22 +7,9 @@ RUN apk add --no-cache \
     postgresql-dev \
     gcc \
     python3-dev \
-    musl-dev \
-    unzip
+    musl-dev
 
+RUN pip3 install requests
+RUN pip3 install sqlalchemy
+RUN pip3 install pandas
 RUN pip3 install psycopg2
-
-# Set a working directory
-WORKDIR /app
-
-# Copy folder into the container
-COPY subject.zip /app/
-
-# Unzip folder
-RUN unzip subject.zip
-
-# add data_2023_feb
-COPY *.csv /app/subject/customer/
-
-# Change permissions
-RUN chmod -R +x /app/*
